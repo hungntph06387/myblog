@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +16,9 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/post', [PostController::class, 'create'])->middleware(['login', 'role'])->name(name:'post.create');
+Route::post('/post', [PostController::class, 'store'])->name(name:'post.store');
+Route::get('/login', function(){
+    return view('login');
+})->name('login');
